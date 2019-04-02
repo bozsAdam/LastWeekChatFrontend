@@ -19,3 +19,23 @@ function createRequest(username,message){
         "username":username
     }
 }
+
+
+function sendMessage(request){
+    $.ajax({
+        type: "POST",
+        url: serverUrl + "message",
+        data: JSON.stringify(request),
+        dataType: "JSON",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        success: function (response) {
+            console.log("success");
+        },
+        error: function (error){
+            console.log("failed because: " + error)
+        }
+    });
+}
