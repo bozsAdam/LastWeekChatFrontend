@@ -12,3 +12,10 @@ function connectToSocket() {
 
     });
 }
+
+function createRequest(username,message){
+    return {
+        "message":message,
+        "username":username
+    }
+}
