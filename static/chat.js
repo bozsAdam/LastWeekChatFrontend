@@ -39,3 +39,9 @@ function sendMessage(request){
         }
     });
 }
+
+document.getElementById("sendChat")
+    .addEventListener("click",(e)=>{
+        e.preventDefault();
+        sendMessage(createRequest("jozsi",document.getElementById("chatInput").value))
+    });
