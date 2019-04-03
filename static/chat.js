@@ -1,5 +1,47 @@
 let serverUrl = "http://localhost:61000/";
 
+function renderMessage(messages) {
+
+    let userName = sessionStorage.getItem("user_name");
+
+    for (data of messages){
+        let cardPanel = document.createElement("div");
+        let textSpan = document.createElement("div");
+        let imgSpan = document.createElement("img");
+        let wrapperRow = document.createElement("div");
+
+        wrapperRow.appendChild(cardPanel);
+        cardPanel.appendChild(textSpan);
+        if(data.gif != null) cardPanel.appendChild(imgSpan);
+
+
+        if ( userName === data.userName) {
+            wrapperRow.classList.add("right-align");
+            cardPanel.classList.add("cyan");
+            cardPanel.classList.add("darken-2");
+            textSpan.classList.add("white-text");
+        } else {
+            cardPanel.classList.add("grey");
+            cardPanel.classList.add("lighten-2");
+            textSpan.classList.add("black-text");
+        }
+
+        textSpan.innerText = data.message;
+        wrapperRow.classList.add("row");
+        cardPanel.classList.add("card-panel");
+
+        if(data.gif != null) {
+            imgSpan.setAttribute("src", data.gif);
+            imgSpan.setAttribute("alt", data.gif);
+            wrapperRow.classList.add("row");
+            cardPanel.classList.add("card-panel");
+        }
+
+        document.getElementById("messageContainer")
+            .appendChild(wrapperRow);
+    }
+}
+
 function connectToSocket() {
     var socket = new SockJS(serverUrl + 'chat-server');
     stompClient = Stomp.over(socket);
@@ -7,44 +49,7 @@ function connectToSocket() {
         console.log('Connected: ' + frame);
         stompClient.debug = () => {};
         stompClient.subscribe('/chat', function (greeting) {
-            let data = JSON.parse(greeting.body);
-            let cardPanel = document.createElement("div");
-            let textSpan = document.createElement("div");
-            let imgSpan = document.createElement("img");
-            let wrapperRow = document.createElement("div");
-
-            wrapperRow.appendChild(cardPanel);
-            cardPanel.appendChild(textSpan);
-            if(data.gif != null) cardPanel.appendChild(imgSpan);
-
-
-            if(sessionStorage.getItem("user_name") === data.userName){
-                wrapperRow.classList.add("right-align");
-                cardPanel.classList.add("cyan");
-                cardPanel.classList.add("darken-2");
-                textSpan.classList.add("white-text");
-            } else{
-                cardPanel.classList.add("grey");
-                cardPanel.classList.add("lighten-2");
-                textSpan.classList.add("black-text");
-            }
-
-            textSpan.innerText = data.message;
-            wrapperRow.classList.add("row");
-            cardPanel.classList.add("card-panel");
-
-            if(data.gif != null) {
-                imgSpan.setAttribute("src", data.gif);
-                imgSpan.setAttribute("alt", data.gif);
-                wrapperRow.classList.add("row");
-                cardPanel.classList.add("card-panel");
-            }
-
-            document.getElementById("messageContainer")
-                    .appendChild(wrapperRow);
-
-
-
+            renderMessage([JSON.parse(greeting.body)]);
         });
 
     });
