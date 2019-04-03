@@ -6,8 +6,35 @@ function connectToSocket() {
     stompClient.connect({}, function (frame) {
         console.log('Connected: ' + frame);
         stompClient.subscribe('/chat', function (greeting) {
-            console.log("Connected to the game socket");
-            console.log(JSON.parse(greeting.body))
+            let data = JSON.parse(greeting.body);
+            let cardPanel = document.createElement("div");
+            let textSpan = document.createElement("div");
+            let wrapperRow = document.createElement("div");
+
+            wrapperRow.appendChild(cardPanel);
+            cardPanel.appendChild(textSpan);
+
+
+            if(sessionStorage.getItem("user_name") === data.userName){
+                wrapperRow.classList.add("right-align");
+                cardPanel.classList.add("cyan");
+                cardPanel.classList.add("darken-2");
+                textSpan.classList.add("white-text");
+            } else{
+                cardPanel.classList.add("grey");
+                cardPanel.classList.add("lighten-2");
+                textSpan.classList.add("black-text");
+            }
+
+            textSpan.innerText = data.message;
+            wrapperRow.classList.add("row");
+            cardPanel.classList.add("card-panel");
+
+            document.getElementById("messageContainer")
+                    .appendChild(wrapperRow);
+
+
+
         });
 
     });
@@ -16,7 +43,7 @@ function connectToSocket() {
 function createRequest(username,message){
     return {
         "message":message,
-        "username":username
+        "userName":username
     }
 }
 
@@ -30,12 +57,6 @@ function sendMessage(request){
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
-        },
-        success: function (response) {
-            console.log("success");
-        },
-        error: function (error){
-            console.log("failed because: " + error)
         }
     });
 }
@@ -43,5 +64,8 @@ function sendMessage(request){
 document.getElementById("sendChat")
     .addEventListener("click",(e)=>{
         e.preventDefault();
-        sendMessage(createRequest("jozsi",document.getElementById("chatInput").value))
+        let userName = sessionStorage.getItem("user_name");
+        console.log(userName);
+        request = createRequest(userName, document.getElementById("chatInput").value);
+        sendMessage(request);
     });
