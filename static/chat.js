@@ -1,4 +1,4 @@
-let serverUrl = "http://localhost:61000/";
+let serverUrl = "http://192.168.163.228:61000/";
 
 function connectToSocket() {
     var socket = new SockJS(serverUrl + 'chat-server');
