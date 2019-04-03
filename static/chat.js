@@ -5,6 +5,7 @@ function connectToSocket() {
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         console.log('Connected: ' + frame);
+        stompClient.debug = () => {};
         stompClient.subscribe('/chat', function (greeting) {
             let data = JSON.parse(greeting.body);
             let cardPanel = document.createElement("div");
@@ -74,7 +75,7 @@ document.getElementById("sendChat")
     .addEventListener("click",(e)=>{
         e.preventDefault();
         let userName = sessionStorage.getItem("user_name");
-        console.log(userName);
         request = createRequest(userName, document.getElementById("chatInput").value);
         sendMessage(request);
+        document.getElementById("chatInput").value = "";
     });

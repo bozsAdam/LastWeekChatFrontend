@@ -60,21 +60,38 @@
     </div>
 
     <div id="messageContainer"></div>
-        <div id="messageContainer"></div>
 
-    <form>
-        <input id="chatInput">
-        <button id="sendChat"> send </button>
-    </form>
-        <button id="gif-btn"> add gif </button>
 
-        <div id="auto_complete">
+
+
+
+
+    </div>
+
+    <div class="bottom-stick ">
+        <div class="container">
             <div class="row">
-                <div class="col s4 auto_complete" id="ac_option0"></div>
-                <div class="col s4 auto_complete" id="ac_option1"></div>
-                <div class="col s4 auto_complete" id="ac_option2"></div>
+                <div id="auto_complete">
+                    <div class="row">
+                        <div class="col s4 auto_complete" id="ac_option0"></div>
+                        <div class="col s4 auto_complete" id="ac_option1"></div>
+                        <div class="col s4 auto_complete" id="ac_option2"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s10">
+                    <input id="chatInput">
+                </div>
+                <div class="col s1">
+                    <button id="sendChat" class="btn-floating btn-large waves-effect waves-light red"> send </button>
+                </div>
+                <div class="col s1">
+                    <button id="gif-btn" class="btn-floating btn-large waves-effect waves-light red"> add gif </button>
+                </div>
             </div>
         </div>
+
     </div>
 </body>
 <script src="/static/chat.js" defer></script>
