@@ -1,11 +1,3 @@
-// document.getElementById("gif-btn")
-//     .addEventListener("click",(e)=>{
-//         e.preventDefault();
-//         let userName = sessionStorage.getItem("user_name");
-//         console.log(userName);
-//         request = createRequest(userName, document.getElementById("chatInput").value);
-//         sendMessage(request);
-//     });
 
 let gifServerUrl = "http://localhost:62000/";
 
@@ -25,17 +17,35 @@ function sendKeyword(request){
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
-        }
-    });
+        },
+        success: function (response) {
+            let Modalelem = document.getElementById('gif-select-modal');
+            let instance = M.Modal.init(Modalelem);
+            instance.open();
+            console.log(response);
+            let gifContainer = document.getElementById("gif-container");
+            for (let i = 0; i < response.length; i++) {
+                let gifDiv = document.createElement("div");
+                gifDiv.setAttribute("class", "col s6");
+                let gif = document.createElement("a");
+                gif.setAttribute("href", "#");
+                let img = document.createElement("img");
+                img.setAttribute("src", response[i]);
+                img.setAttribute("alt", response[i]);
+                img.setAttribute("height", "150");
+                img.setAttribute("width", "300");
+                gif.appendChild(img);
+                gifDiv.appendChild(gif);
+                gifContainer.appendChild(gifDiv);
+            }
+        }});
 }
 
 document.getElementById("gif-btn").addEventListener('click', function () {
 
             let Modalelem = document.getElementById('gif-input-modal');
             let instance = M.Modal.init(Modalelem);
-            //if (sessionStorage.getItem("user_name") === null) {
-                instance.open();
-            //}
+            instance.open();
             let accept_button = document.getElementById("accept-gif-input");
             accept_button.addEventListener('click', function () {
 
