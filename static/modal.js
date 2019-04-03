@@ -15,10 +15,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 sessionStorage.setItem('user_name', user_name)
 
-            })
+            });
+            let elem = document.querySelectorAll('.tooltipped');
+            let instances = M.Tooltip.init(elem);
 
 });
-
-
-
 
