@@ -3,7 +3,14 @@ let gifServerUrl = "http://localhost:62000/";
 
 function createGifSearchRequest(keyword){
     return {
-        keyword : keyword,
+        keyword : keyword
+    }
+}
+
+function createGifMessageRequest(username,gifUrl){
+    return {
+        "gif":gifUrl,
+        "userName":username
     }
 }
 
@@ -37,6 +44,11 @@ function sendKeyword(request){
                 gif.appendChild(img);
                 gifDiv.appendChild(gif);
                 gifContainer.appendChild(gifDiv);
+                gif.addEventListener('click', function () {
+                    let userName = sessionStorage.getItem("user_name");
+                    let gifMessageRequest = createGifMessageRequest(userName, response[i]);
+                    sendMessage(gifMessageRequest)
+                })
             }
         }});
 }
@@ -51,9 +63,9 @@ document.getElementById("gif-btn").addEventListener('click', function () {
 
                 let gif_input = document.getElementById("gif-input");
                 let searchKeyword = gif_input.value;
-                sessionStorage.setItem('gif_input', searchKeyword)
-                request = createGifSearchRequest(searchKeyword);
-                sendKeyword(request);
+                sessionStorage.setItem('gif_input', searchKeyword);
+                let gifSearchRequest = createGifSearchRequest(searchKeyword);
+                sendKeyword(gifSearchRequest);
 
             })
 
