@@ -7,10 +7,13 @@
 
 /* Place the navbar at the bottom of the page, and make it stick */
 .bottom-stick {
-    background-color: #333;
     text-align: center;
     overflow: hidden;
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+#messageContainer{
+    margin-bottom: 20%;
 }

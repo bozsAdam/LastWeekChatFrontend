@@ -9,10 +9,36 @@ function renderMessage(messages) {
         let textSpan = document.createElement("div");
         let imgSpan = document.createElement("img");
         let wrapperRow = document.createElement("div");
+        let userNameDiv = document.createElement("div");
+        let dateDiv = document.createElement("div");
+        let headRow = document.createElement("div");
+        let messageRow = document.createElement("div");
+        let dateRow = document.createElement("div");
+
+
+        userNameDiv.classList.add("left-align");
+        userNameDiv.classList.add("grey-text");
+        dateDiv.classList.add("right-align");
+        dateDiv.classList.add("grey-text");
+        wrapperRow.classList.add("container");
+        headRow.classList.add("row");
+        messageRow.classList.add("row");
+        dateRow.classList.add("row");
+        userNameDiv.innerText = data.userName;
+        dateDiv.innerText = data.timeStamp;
+
+        headRow.appendChild(userNameDiv);
+        dateRow.appendChild(dateDiv);
+
 
         wrapperRow.appendChild(cardPanel);
-        cardPanel.appendChild(textSpan);
+        cardPanel.appendChild(headRow);
         if(data.gif != null) cardPanel.appendChild(imgSpan);
+        cardPanel.appendChild(messageRow);
+        cardPanel.appendChild(dateRow);
+        messageRow.appendChild(textSpan);
+
+
 
 
         if ( userName === data.userName) {
@@ -22,7 +48,7 @@ function renderMessage(messages) {
             textSpan.classList.add("white-text");
         } else {
             cardPanel.classList.add("grey");
-            cardPanel.classList.add("lighten-2");
+            cardPanel.classList.add("lighten-4");
             textSpan.classList.add("black-text");
         }
 
@@ -40,6 +66,24 @@ function renderMessage(messages) {
         document.getElementById("messageContainer")
             .appendChild(wrapperRow);
     }
+}
+
+function getMessages(){
+    $.ajax({
+        type: "GET",
+        url: serverUrl + "getMessages",
+        dataType: "JSON",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        success: function (response) {
+            renderMessage(response);
+        },
+        error: function(response){
+            console.log(response);
+        }
+    });
 }
 
 function connectToSocket() {
