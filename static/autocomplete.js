@@ -6,33 +6,37 @@ document.addEventListener('DOMContentLoaded', function () {
 
         let inputField = document.getElementById("chatInput");
         let lastWordInput = getLastWord(inputField.value);
-        if (lastWordInput != "" &&  document.getElementById("chatInput") === document.activeElement) {
+        if (lastWordInput != "") {
 
             $.ajax({
 
-            type: "POST",
-            url: serverUrl + "autocomplete",
-            data: JSON.stringify({"word": lastWordInput}),
-            dataType: "JSON",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            success: function (response) {
-                let firstThreeACWord = response.slice(0,3);
-                for (let i = 0; i < firstThreeACWord.length; i++) {
-                    let elem = document.getElementById("ac_option" + i);
-                    elem.innerText = firstThreeACWord[i];
-                    elem.addEventListener('click',() => changeLastWord(inputField.value, elem.innerText))
+                type: "POST",
+                url: serverUrl + "autocomplete",
+                data: JSON.stringify({"word": lastWordInput}),
+                dataType: "JSON",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                success: function (response) {
+
+                    let ACOptions = document.getElementsByClassName("auto_complete");
+                    let firstThreeACWord = response.slice(0,3);
+                    for (let i = 0; i < ACOptions.length; i++) {
+                        ACOptions[i].innerText = "";
+                        if (i < firstThreeACWord.length) {
+                            ACOptions[i].innerText = firstThreeACWord[i];
+                            ACOptions[i].addEventListener('click',() => changeLastWord(inputField.value, ACOptions[i].innerText))
+                        }
+                    }
+
+                },
+                error: function (response) {
+                    console.log("Some error happened");
                 }
 
-            },
-            error: function (response) {
-                console.log("Some error happened");
-            }
-
-
             });
+
         }
 
     });
@@ -42,9 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function getLastWord(text) {
 
         let words = text.split(" ");
-        console.log(words[words.length - 1]);
         return words[words.length - 1];
-
 
 }
 
