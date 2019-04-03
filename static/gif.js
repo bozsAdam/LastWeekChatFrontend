@@ -26,9 +26,9 @@ function sendKeyword(request){
             'Content-Type': 'application/json'
         },
         success: function (response) {
-            let Modalelem = document.getElementById('gif-select-modal');
-            let instance = M.Modal.init(Modalelem);
-            instance.open();
+            let ModalelemSelect = document.getElementById('gif-select-modal');
+            let instanceSelect = M.Modal.init(ModalelemSelect);
+            instanceSelect.open();
             console.log(response);
             let gifContainer = document.getElementById("gif-container");
             for (let i = 0; i < response.length; i++) {
@@ -47,7 +47,10 @@ function sendKeyword(request){
                 gif.addEventListener('click', function () {
                     let userName = sessionStorage.getItem("user_name");
                     let gifMessageRequest = createGifMessageRequest(userName, response[i]);
-                    sendMessage(gifMessageRequest)
+                    sendMessage(gifMessageRequest);
+                    let ModalelemSelect = document.getElementById('gif-select-modal');
+                    let instanceSelect = M.Modal.init(ModalelemSelect);
+                    instanceSelect.close();
                 })
             }
         }});
@@ -55,9 +58,9 @@ function sendKeyword(request){
 
 document.getElementById("gif-btn").addEventListener('click', function () {
 
-            let Modalelem = document.getElementById('gif-input-modal');
-            let instance = M.Modal.init(Modalelem);
-            instance.open();
+            let ModalelemSearch = document.getElementById('gif-input-modal');
+            let instanceSearch = M.Modal.init(ModalelemSearch);
+            instanceSearch.open();
             let accept_button = document.getElementById("accept-gif-input");
             accept_button.addEventListener('click', function () {
 

@@ -17,26 +17,27 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="/static/modal.js"></script>
-
+    <script src="/static/autocomplete.js"></script>
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    <link href="/static/style.css" rel="stylesheet">
     <script src="/static/chat.js" defer></script>
 
 </head>
 <body>
+    <div class="container">
 
-    <!-- Modal Structure -->
-    <div id="modal1" class="modal">
-        <div class="modal-content">
-            <h4>Welcome to LastWeekChat</h4>
-            <h5>Please set your username</h5>
-            <input placeholder="Anonymus" id="user_name" type="text" class="validate">
+        <!-- Modal Structure -->
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <h4>Welcome to LastWeekChat</h4>
+                <h5>Please set your username</h5>
+                <input placeholder="Anonymus" id="user_name" type="text" class="validate">
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn" id="accept_username">Accept</a>
+            </div>
         </div>
-        <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn" id="accept_username">Accept</a>
-        </div>
-    </div>
 
     <!-- Modal Structure -->
     <div id="gif-input-modal" class="modal">
@@ -59,12 +60,28 @@
     </div>
 
     <div id="messageContainer"></div>
+        <div id="messageContainer"></div>
 
     <form>
         <input id="chatInput">
-        <button id="sendChat"> send </button>  <button id="gif-btn"> add gif </button>
+        <button id="sendChat"> send </button>
     </form>
+        <button id="gif-btn"> add gif </button>
 
+        <div id="auto_complete">
+            <div class="row">
+                <div class="col s4 auto_complete" id="ac_option0"></div>
+                <div class="col s4 auto_complete" id="ac_option1"></div>
+                <div class="col s4 auto_complete" id="ac_option2"></div>
+            </div>
+        </div>
+        <div>
+            <form>
+                <input id="chatInput">
+                <button id="sendChat"> send </button>
+            </form>
+        </div>
+    </div>
 </body>
 <script src="/static/gif.js"></script>
 </html>

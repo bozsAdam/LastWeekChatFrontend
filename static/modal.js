@@ -15,10 +15,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 sessionStorage.setItem('user_name', user_name)
 
-            })
+            });
+            connectToSocket();
 
 });
-
-
-
 
