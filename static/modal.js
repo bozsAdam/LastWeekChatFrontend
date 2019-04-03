@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-            let Modalelem = document.querySelector('.modal');
+            let Modalelem = document.getElementById('modal1');
             let instance = M.Modal.init(Modalelem);
             if (sessionStorage.getItem("user_name") === null) {
                 instance.open();
