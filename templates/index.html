@@ -3,6 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>LastWeekChat</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js" defer></script>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
@@ -11,6 +19,8 @@
     <script src="/static/modal.js"></script>
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script src="/static/chat.js" defer></script>
 
 </head>
 <body>
@@ -26,6 +36,13 @@
             <a href="#!" class="modal-close waves-effect waves-green btn" id="accept_username">Accept</a>
         </div>
     </div>
+
+    <div id="messageContainer"></div>
+
+    <form>
+        <input id="chatInput">
+        <button id="sendChat"> send </button>
+    </form>
 
 </body>
 </html>
