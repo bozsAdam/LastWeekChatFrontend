@@ -9,10 +9,12 @@ function connectToSocket() {
             let data = JSON.parse(greeting.body);
             let cardPanel = document.createElement("div");
             let textSpan = document.createElement("div");
+            let imgSpan = document.createElement("img");
             let wrapperRow = document.createElement("div");
 
             wrapperRow.appendChild(cardPanel);
             cardPanel.appendChild(textSpan);
+            if(data.gif != null) cardPanel.appendChild(imgSpan);
 
 
             if(sessionStorage.getItem("user_name") === data.userName){
@@ -29,6 +31,13 @@ function connectToSocket() {
             textSpan.innerText = data.message;
             wrapperRow.classList.add("row");
             cardPanel.classList.add("card-panel");
+
+            if(data.gif != null) {
+                imgSpan.setAttribute("src", data.gif);
+                imgSpan.setAttribute("alt", data.gif);
+                wrapperRow.classList.add("row");
+                cardPanel.classList.add("card-panel");
+            }
 
             document.getElementById("messageContainer")
                     .appendChild(wrapperRow);
