@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    let serverUrl = "http://192.168.163.228:60010/";
+    let serverUrl = "http://localhost:60010/";
 
     document.getElementById("chatInput").addEventListener('input', () => {
 
