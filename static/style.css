@@ -5,6 +5,11 @@
     min-height: 30px;
 }
 
+#ac_option0:hover, #ac_option1:hover, #ac_option2:hover {
+    background: grey;
+    cursor: pointer;
+}
+
 /* Place the navbar at the bottom of the page, and make it stick */
 .bottom-stick {
     text-align: center;

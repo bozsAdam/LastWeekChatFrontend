@@ -17,9 +17,9 @@ function renderMessage(messages) {
 
 
         userNameDiv.classList.add("left-align");
-        userNameDiv.classList.add("grey-text");
+        userNameDiv.classList.add("orange-text");
         dateDiv.classList.add("right-align");
-        dateDiv.classList.add("grey-text");
+        dateDiv.classList.add("orange-text");
         wrapperRow.classList.add("container");
         headRow.classList.add("row");
         messageRow.classList.add("row");
