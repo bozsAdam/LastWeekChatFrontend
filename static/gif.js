@@ -51,6 +51,7 @@ function sendKeyword(request){
                     let ModalelemSelect = document.getElementById('gif-select-modal');
                     let instanceSelect = M.Modal.init(ModalelemSelect);
                     instanceSelect.close();
+                    document.location.reload();
                 })
             }
         }});
