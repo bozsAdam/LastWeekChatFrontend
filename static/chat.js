@@ -1,4 +1,5 @@
-let serverUrl = "http://localhost:61000/";
+let serverUrl = "ws://localhost:8080/";
+let webSocket = new WebSocket(serverUrl + 'chat');
 
 function renderMessage(messages) {
 
@@ -34,15 +35,10 @@ function renderMessage(messages) {
 }
 
 function connectToSocket() {
-    var socket = new SockJS(serverUrl + 'chat-server');
-    stompClient = Stomp.over(socket);
-    stompClient.connect({}, function (frame) {
-        console.log('Connected: ' + frame);
-        stompClient.subscribe('/chat', function (greeting) {
-            renderMessage([JSON.parse(greeting.body)]);
-        });
-
-    });
+    webSocket.onmessage = (message) => {
+        console.log(message.data)
+        renderMessage([JSON.parse(message.data)]);
+    };
 }
 
 function createRequest(username,message){
@@ -54,20 +50,11 @@ function createRequest(username,message){
 
 
 function sendMessage(request){
-    $.ajax({
-        type: "POST",
-        url: serverUrl + "message",
-        data: JSON.stringify(request),
-        dataType: "JSON",
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
-    });
+    webSocket.send(JSON.stringify(request));
 }
 
 function getMessages(){
-    $.ajax({
+    /*$.ajax({
         type: "GET",
         url: serverUrl + "getMessages",
         data: JSON.stringify(request),
@@ -82,7 +69,7 @@ function getMessages(){
         error: function(response){
             console.log(response);
         }
-    });
+    });*/
 }
 
 
